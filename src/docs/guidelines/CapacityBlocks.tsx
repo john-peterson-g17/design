@@ -132,7 +132,7 @@ export function CapacityBlocksGuideline() {
           <code>CapacityBlock</code> is how a block appears wherever it is: waiting for a week, in
           its week on a schedule, or being moved. It shows the figure, the name, and the size, then
           <code>children</code>, normally <code>CapacityPlacement</code> (the project and focus
-          it&rsquo;s on), and <code>footer</code> (when it&rsquo;s worked on, or the way to schedule
+          it&rsquo;s on), and <code>footer</code> (who works on it, and when, or the way to schedule
           it).
         </p>
         <ul>
@@ -227,6 +227,56 @@ export function CapacityBlocksGuideline() {
           </li>
         </ul>
       </Guidance>
+
+      <Guidance title="Who works on it">
+        <p>
+          <code>CapacityEngineer</code> is the block&rsquo;s engineer, as the first line of its{" "}
+          <code>footer</code>, above when. Who and when sit together under the hairline; what
+          it&rsquo;s on stays above it.
+        </p>
+        <ul>
+          <li>
+            <strong>An assigned engineer is their picture and name,</strong> from an{" "}
+            <code>EngineerProfile</code>, and the name opens <code>EngineerDetails</code> on hover,
+            focus, or tap: their level, a short bio, and a link to their profile where the app has
+            one. Without a picture, it shows their initials.
+          </li>
+          <li>
+            <strong>In Exalynt&rsquo;s admin views,</strong> pass <code>onAssignClick</code>. With
+            no engineer, the line is &ldquo;Assign engineer&rdquo; in the primary color; with one, a
+            change button at the end of the line changes who, apart from the name, so a tap on a
+            phone never opens the picker and the popover together. It hands over the line to anchor
+            the app&rsquo;s picker to, such as <code>SearchSelect</code> in a popover.
+          </li>
+          <li>
+            <strong>In a client&rsquo;s view,</strong> leave <code>onAssignClick</code> out. The
+            line shows the engineer, with their popover, or &ldquo;No engineer yet&rdquo;, muted,
+            and can&rsquo;t be changed.
+          </li>
+          <li>
+            <strong>A name, not a status.</strong> A block with no engineer keeps its own status in{" "}
+            <code>badge</code>; don&rsquo;t add one such as &ldquo;Unstaffed&rdquo;.
+          </li>
+        </ul>
+      </Guidance>
+      <CodeBlock
+        code={`import { CapacityBlock, CapacityEngineer } from "@exalynt/design/components";
+
+<CapacityBlock
+  block={capacity.type}
+  footer={
+    <>
+      <CapacityEngineer
+        engineer={engineerProfile}
+        onAssignClick={isAdmin ? (anchor) => openEngineerPicker(anchor) : undefined}
+      />
+      <When capacity={capacity} />
+    </>
+  }
+>
+  <CapacityPlacement project={project?.name ?? null} focus={focus?.name} upNext={next?.name} />
+</CapacityBlock>`}
+      />
 
       <Guidance title="The popover">
         <p>

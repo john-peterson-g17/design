@@ -84,14 +84,22 @@ export function DetailsEyebrow({ children }: { children: ReactNode }) {
   );
 }
 
-/* A popover's closing link to the readme: an ordinary link, in the theme's link color and
-   underlined, opening in a new tab so the reader keeps their place. */
-export function DetailsLink({ href, children }: { href: string; children: ReactNode }) {
+/* A popover's closing link: an ordinary link, in the theme's link color and underlined. To
+   the readme, it opens in a new tab so the reader keeps their place; with `newTab={false}`,
+   for a page in the app, it opens in the same tab. */
+export function DetailsLink({
+  href,
+  newTab = true,
+  children,
+}: {
+  href: string;
+  newTab?: boolean;
+  children: ReactNode;
+}) {
   return (
     <Link
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(newTab && { target: "_blank", rel: "noopener noreferrer" })}
       underline="always"
       sx={{
         display: "inline-block",
@@ -101,7 +109,8 @@ export function DetailsLink({ href, children }: { href: string; children: ReactN
         textUnderlineOffset: 2,
       }}
     >
-      {children} ↗
+      {children}
+      {newTab ? " ↗" : null}
     </Link>
   );
 }

@@ -5,12 +5,16 @@
 export * from "./CalloutPanel";
 export * from "./CapacityBlock";
 export * from "./CapacityDetails";
+export * from "./CapacityEngineer";
 export * from "./CapacityFigure";
 export * from "./CapacityLine";
 export * from "./CapacityPlacement";
 export * from "./ConfirmDialog";
 export * from "./DateTime";
 export * from "./EmptyState";
+export * from "./EngineerDetails";
+export * from "./EngineerLevelBadge";
+export * from "./EngineerLevelDetails";
 export * from "./MaturityDetails";
 export * from "./MaturityRing";
 export * from "./PageHeader";
@@ -35,6 +39,15 @@ export {
   type StabilityLevel,
   type StabilityLevelId,
 } from "./stability";
+// Engineer levels: their names and what each is trusted with. What the levels
+// mean, and how they're set, is the readme's (ENGINEER_LEVEL_DOCS_URL).
+export {
+  ENGINEER_LEVELS,
+  ENGINEER_LEVEL_DOCS_URL,
+  ENGINEER_LEVEL_IDS,
+  type EngineerLevel,
+  type EngineerLevelId,
+} from "./engineerLevel";
 // Toasts: raised with useToast() under a ToastProvider.
 export { useToast, type Toaster } from "./toast";
 // Money: the API's cents, as text for the reader and back.

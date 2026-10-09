@@ -20,8 +20,9 @@ export type CapacityBlockProps = {
   /** What the block is on, under its size: its project and focus, from the app. */
   children?: ReactNode;
   /**
-   * Pinned to the foot over a hairline: when it's worked on, or the way to
-   * schedule it, as CapacityLines so its icons line up with the figure.
+   * Pinned to the foot over a hairline: who works on it (CapacityEngineer) and
+   * when, or the way to schedule it, as CapacityLines so its icons line up
+   * with the figure.
    */
   footer?: ReactNode;
   /** Beside the name, such as the app's status chip for it. */

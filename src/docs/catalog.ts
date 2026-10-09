@@ -15,14 +15,18 @@ import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBullet
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ContrastOutlinedIcon from "@mui/icons-material/ContrastOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 import DynamicFormOutlinedIcon from "@mui/icons-material/DynamicFormOutlined";
+import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import InboxOutlinedIcon from "@mui/icons-material/InboxOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
 import PaletteOutlinedIcon from "@mui/icons-material/PaletteOutlined";
 import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
@@ -35,12 +39,16 @@ import WebAssetOutlinedIcon from "@mui/icons-material/WebAssetOutlined";
 import { CalloutPanelDemo } from "../components/CalloutPanel.demo";
 import { CapacityBlockDemo } from "../components/CapacityBlock.demo";
 import { CapacityDetailsDemo } from "../components/CapacityDetails.demo";
+import { CapacityEngineerDemo } from "../components/CapacityEngineer.demo";
 import { CapacityFigureDemo } from "../components/CapacityFigure.demo";
 import { CapacityLineDemo } from "../components/CapacityLine.demo";
 import { CapacityPlacementDemo } from "../components/CapacityPlacement.demo";
 import { ConfirmDialogDemo } from "../components/ConfirmDialog.demo";
 import { DateTimeDemo } from "../components/DateTime.demo";
 import { EmptyStateDemo } from "../components/EmptyState.demo";
+import { EngineerDetailsDemo } from "../components/EngineerDetails.demo";
+import { EngineerLevelBadgeDemo } from "../components/EngineerLevelBadge.demo";
+import { EngineerLevelDetailsDemo } from "../components/EngineerLevelDetails.demo";
 import { PageHeaderDemo } from "../components/PageHeader.demo";
 import { SearchSelectDemo } from "../components/SearchSelect.demo";
 import { SectionCardDemo } from "../components/SectionCard.demo";
@@ -60,6 +68,7 @@ import { BrandDemo } from "../exalynt/Brand.demo";
 import { PaletteDemo } from "./foundations/Palette";
 import { CapacityBlocksGuideline } from "./guidelines/CapacityBlocks";
 import { DatesAndTimesGuideline } from "./guidelines/DatesAndTimes";
+import { EngineerLevelsGuideline } from "./guidelines/EngineerLevels";
 import { FormsGuideline } from "./guidelines/Forms";
 import { MoneyGuideline } from "./guidelines/Money";
 import { MuiFirstGuideline } from "./guidelines/MuiFirst";
@@ -337,6 +346,16 @@ export const catalog: Group[] = [
         Demo: CapacityPlacementDemo,
       },
       {
+        title: "CapacityEngineer",
+        description:
+          "Who works on a block, as one line for CapacityBlock's footer, above when: the engineer's picture and name, which open EngineerDetails, or \"No engineer yet\". `onAssignClick` makes it the admin's inline control: \"Assign engineer\" with no one assigned, and a change button at the end of an assigned engineer's line. Without it, as in a client's view, it's read-only.",
+        importFrom: "components",
+        phone:
+          "It fills the card's width, and a long name is cut short; the popover says it in full. A tap on the name opens the popover, and the change button is separate, so a tap never opens both. The picker it opens should use SearchSelect, whose rows are 48px on phones.",
+        icon: EngineeringOutlinedIcon,
+        Demo: CapacityEngineerDemo,
+      },
+      {
         title: "CapacityLine",
         description:
           "One line on a block's card: an 18px icon centred in a column as wide as the figure, so every line's icon sits on the figure's axis in every state, then text cut short with an ellipsis. Read-only by default; `onClick` makes it a button, `menu` adds the chevron, `action` is the primary prompt, and `disabled` and `muted` hold a place. Build a block's footer from it.",
@@ -365,6 +384,48 @@ export const catalog: Group[] = [
           "The card is 300px wide, or the screen less 24px when that's narrower. With `card={false}` it fills its container.",
         icon: ChatBubbleOutlineOutlinedIcon,
         Demo: CapacityDetailsDemo,
+      },
+    ],
+  },
+  {
+    title: "Engineers",
+    entries: [
+      {
+        title: "Engineer levels",
+        description:
+          "How to show an engineer's level: always as the badge, beside their name, with its popover, and never to decorate a person or mention pay. For Exalynt's own tools. What the levels mean and how they're set are in the readme.",
+        icon: WorkspacePremiumOutlinedIcon,
+        Demo: EngineerLevelsGuideline,
+      },
+      {
+        title: "EngineerLevelBadge",
+        description:
+          "An engineer's level as a small, quiet outlined Chip: four squares filled in reading order to the level, and its name, in the theme's secondary text color so the engineer's name beside it leads. Every level looks alike, so none reads as a better or cheaper deal, and a popover (EngineerLevelDetails) saying what the level means. Beside the engineer's name, never in place of it. Pass `focusable={false}` inside a button or link.",
+        importFrom: "components",
+        phone:
+          "A 20px Chip with 11px text that never wraps, so it reads the same at 375px; Principal's is the widest, at about 80px. A tap opens the popover, which is 300px wide at most and keeps 12px from the screen's edges. Where a row is tight, let the name wrap above the badge rather than cut the badge.",
+        icon: BadgeOutlinedIcon,
+        Demo: EngineerLevelBadgeDemo,
+      },
+      {
+        title: "EngineerLevelDetails",
+        description:
+          "What an engineer's level means, as EngineerLevelBadge's popover shows it: the four levels' squares and names with this one a step brighter, what an engineer at it leads, what a level is, and a link to the level in the readme's Levels and growth page. Never pay. `card={false}` drops the card to sit in one of your own.",
+        importFrom: "components",
+        phone:
+          "The card is 300px wide, or the screen less 24px when that's narrower. The four levels fit side by side down to a 320px screen. With `card={false}` it fills its container.",
+        icon: ChatBubbleOutlineOutlinedIcon,
+        Demo: EngineerLevelDetailsDemo,
+      },
+      {
+        title: "EngineerDetails",
+        description:
+          "Who an engineer is, as CapacityEngineer's popover shows it: their picture, or initials without one, their name and level badge, a short bio cut at four lines, and an optional link to their profile page in the same tab. Takes an `EngineerProfile`. `card={false}` drops the card to sit in one of your own.",
+        importFrom: "components",
+        phone:
+          "The card is 300px wide, or the screen less 24px when that's narrower. A tap on the level badge inside opens its own popover. With `card={false}` it fills its container.",
+        icon: AccountCircleOutlinedIcon,
+        Demo: EngineerDetailsDemo,
       },
     ],
   },
