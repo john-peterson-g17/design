@@ -1,0 +1,96 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://design.exalynt.io
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build the design system page
+        run: npm run build
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+  # Publishes @exalynt/design to GitHub Packages. Every commit on main goes out
+  # as 0.0.0-main-<sha> under the `main` dist-tag; a published GitHub release
+  # goes out as its tag's version (v1.2.3 -> 1.2.3) under `latest`, or `next`
+  # when the release is marked as a pre-release.
+  release:
+    if: github.event_name == 'release' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: "@exalynt"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build package
+        run: npm run build:lib
+
+      - name: Set version
+        id: version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          PRERELEASE: ${{ github.event.release.prerelease }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = release ]; then
+            version="${RELEASE_TAG#v}"
+            if [ "$PRERELEASE" = true ]; then tag=next; else tag=latest; fi
+          else
+            version="0.0.0-main-${HEAD_SHA::7}"
+            tag=main
+          fi
+          npm version "$version" --no-git-tag-version --allow-same-version
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Publish
+        run: npm publish --tag "${{ steps.version.outputs.tag }}"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
