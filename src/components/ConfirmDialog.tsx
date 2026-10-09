@@ -22,9 +22,9 @@ export type ConfirmDialogProps = {
  * Asks before something that can't be taken back with a click: removing a
  * person, leaving an organization, deleting an email address. The dialog
  * stays open, its buttons disabled, while `onConfirm` runs; it closes itself
- * only when that succeeds, so a failure (already toasted by the caller)
- * leaves the choice in front of the user. `confirmColor` is for asking before
- * something that isn't destructive.
+ * only when that succeeds, so a failure (already toasted by the caller with
+ * useToast) leaves the choice in front of the user. `confirmColor` is for
+ * asking before something that isn't destructive.
  */
 export function ConfirmDialog({
   open,

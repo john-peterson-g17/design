@@ -1,9 +1,7 @@
-import { useState } from "react";
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
 import { CodeBlock } from "../../docs/CodeBlock";
 import { Example } from "../../docs/Example";
 import { invoiceColumns, invoices, type Invoice } from "../../docs/invoices";
+import { useToast } from "../toast";
 import { ListTable, type ListFilter } from "./ListTable";
 
 const noun = { one: "invoice", other: "invoices" };
@@ -14,7 +12,7 @@ const filters: ListFilter<Invoice>[] = [
 ];
 
 export function ListTableDemo() {
-  const [opened, setOpened] = useState<Invoice | null>(null);
+  const toast = useToast();
   return (
     <>
       <Example title="Everything: search, filters, sorting, pagination, clickable rows">
@@ -28,7 +26,7 @@ export function ListTableDemo() {
           filters={filters}
           pagination
           defaultSort={{ column: "issued", direction: "desc" }}
-          onRowClick={setOpened}
+          onRowClick={(row) => toast.info(`Would open ${row.number}.`)}
         />
       </Example>
       <CodeBlock
@@ -76,12 +74,6 @@ export function ListTableDemo() {
           search
         />
       </Example>
-
-      <Snackbar open={opened !== null} autoHideDuration={2500} onClose={() => setOpened(null)}>
-        <Alert severity="info" onClose={() => setOpened(null)}>
-          Would open {opened?.number}
-        </Alert>
-      </Snackbar>
     </>
   );
 }

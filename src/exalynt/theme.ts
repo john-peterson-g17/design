@@ -523,37 +523,6 @@ export const theme = createTheme({
       },
     },
 
-    /* Toasts follow the color scheme like every other surface, but float
-       over the page, so they stand out by lift rather than by a border: a
-       deeper shadow than the flattened scale allows, and in dark mode, where
-       a shadow barely shows, a surface a step lighter than the elevated one.
-       Only the icon carries the severity color (the outlined Alert's own). */
-    MuiSnackbar: {
-      styleOverrides: {
-        root: ({ theme: t }) => ({
-          "& .MuiAlert-root": {
-            width: "100%",
-            maxWidth: 480,
-            [t.breakpoints.up("sm")]: { minWidth: 340 },
-            alignItems: "center",
-            padding: "10px 12px 10px 16px",
-            border: "none",
-            borderRadius: geometry.radiusLarge,
-            color: t.vars.palette.text.primary,
-            backgroundColor: t.vars.palette.background.paper,
-            boxShadow: "0 16px 36px -12px rgb(8 15 26 / 35%), 0 2px 8px rgb(8 15 26 / 10%)",
-            ...t.applyStyles("dark", {
-              backgroundImage: "linear-gradient(rgb(255 255 255 / 7%), rgb(255 255 255 / 7%))",
-              boxShadow: "0 16px 40px -8px rgb(0 0 0 / 70%)",
-            }),
-          },
-          "& .MuiAlert-icon": { fontSize: 22, opacity: 1, marginRight: 12 },
-          "& .MuiAlert-message": { fontWeight: 600 },
-          "& .MuiAlert-action": { paddingTop: 0, color: t.vars.palette.text.secondary },
-        }),
-      },
-    },
-
     /* The trail above every page title (see PageBreadcrumbs): quiet, in the
        size and weight the eyebrow it replaced had, with tight separators. */
     MuiBreadcrumbs: {

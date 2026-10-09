@@ -12,7 +12,7 @@ reuse across them and in client projects, published as the npm package
   `../site/src/theme.css`.
 - **`src/components/`: reusable components.** `PageHeader`, `SectionCard`,
   `StatCard`, `EmptyState`, `CalloutPanel`, `SearchSelect`, `ConfirmDialog`,
-  `ThemeToggle`, the stability and maturity components (`StabilityMark`,
+  `ThemeToggle`, `ToastProvider` and `useToast`, the stability and maturity components (`StabilityMark`,
   `StabilityDetails`, `MaturityRing`,
   `MaturityDetails`), and
   the tables in `table/`: `ListTable` (search, filters, sorting and

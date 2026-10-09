@@ -21,6 +21,7 @@ import InboxOutlinedIcon from "@mui/icons-material/InboxOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
 import PaletteOutlinedIcon from "@mui/icons-material/PaletteOutlined";
 import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
@@ -49,6 +50,7 @@ import { StabilityBannerDemo } from "../components/StabilityBanner.demo";
 import { StabilityDetailsDemo } from "../components/StabilityDetails.demo";
 import { StabilityMarkDemo } from "../components/StabilityMark.demo";
 import { ThemeToggleDemo } from "../components/ThemeToggle.demo";
+import { ToastProviderDemo } from "../components/ToastProvider.demo";
 import { DataTableDemo } from "../components/table/DataTable.demo";
 import { ListTableDemo } from "../components/table/ListTable.demo";
 import { Mark } from "../exalynt";
@@ -61,6 +63,7 @@ import { MoneyGuideline } from "./guidelines/Money";
 import { MuiFirstGuideline } from "./guidelines/MuiFirst";
 import { PagesGuideline } from "./guidelines/Pages";
 import { TablesGuideline } from "./guidelines/Tables";
+import { ToastsGuideline } from "./guidelines/Toasts";
 import { TypographyDemo } from "./foundations/Typography";
 import { MaturityGuideline } from "./guidelines/Maturity";
 import { StabilityLevelsGuideline } from "./guidelines/StabilityLevels";
@@ -409,6 +412,30 @@ export const catalog: Group[] = [
           "Wider than the screen, it scrolls inside its own container. A column with `hideBelow` drops out instead, and while one does the table lets go of its minimum width so the rest fits.",
         icon: GridOnOutlinedIcon,
         Demo: DataTableDemo,
+      },
+    ],
+  },
+  {
+    title: "Feedback",
+    entries: [
+      {
+        title: "Toasts",
+        description:
+          "How a request went, success or failure, is a toast: raised with `useToast()` where the request finishes, never a banner the page renders itself. The four severities (success, error, warning, info), when to use each, with examples, and what isn't a toast.",
+        phone:
+          "Toasts span the top of the screen, 8px from its edges, rather than sitting top right. Keep it to two short sentences so it doesn't cover the page's title and actions for long.",
+        icon: NotificationsNoneOutlinedIcon,
+        Demo: ToastsGuideline,
+      },
+      {
+        title: "ToastProvider",
+        description:
+          'Shows the toasts raised with `useToast()`: `success`, `info`, `warning` or `error`, each with one message. Top right and newest in front, up to three stack with the older ones peeking out underneath; hovering the stack spreads them into a list, with Clear all under it when there\'s more than one, and pauses their timers. With more than three, the list scrolls one toast at a time by wheel, swipe, arrow keys or its arrows, with a scrollbar and "4–6 of 9" saying where it is. Each stays up longer the longer it is (4 to 15 seconds). Mount it once around the app, inside the ThemeProvider.',
+        importFrom: "components",
+        phone:
+          "Below sm the stack spans the top of the screen, 8px from its edges; from sm it's 356px wide, top right. A tap spreads the stack as hover does, and a swipe up or down scrolls it. The close button shows all the time on a touch screen, 22px to look at with a 38px tap area.",
+        icon: NotificationsNoneOutlinedIcon,
+        Demo: ToastProviderDemo,
       },
     ],
   },

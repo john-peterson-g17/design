@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider, type Theme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
-import { ThemeToggle } from "../components";
+import { ThemeToggle, ToastProvider } from "../components";
 import { Brand, geometry, theme } from "../exalynt";
 import { catalog } from "./catalog";
 import { railItemSx } from "./railItem";
@@ -58,14 +58,16 @@ export function App() {
     /* Dark until the visitor picks a mode with the toggle; MUI remembers it. */
     <ThemeProvider theme={theme} defaultMode="dark">
       <CssBaseline enableColorScheme />
-      {framed ? (
-        /* Just the page, without the chrome, padded as the main area is on a phone. */
-        <Box sx={{ px: 2.5, py: 3.5 }}>
-          <Section entry={framed.entry} group={framed.group} />
-        </Box>
-      ) : (
-        <Shell />
-      )}
+      <ToastProvider>
+        {framed ? (
+          /* Just the page, without the chrome, padded as the main area is on a phone. */
+          <Box sx={{ px: 2.5, py: 3.5 }}>
+            <Section entry={framed.entry} group={framed.group} />
+          </Box>
+        ) : (
+          <Shell />
+        )}
+      </ToastProvider>
     </ThemeProvider>
   );
 }
