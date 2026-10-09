@@ -26,7 +26,7 @@ const BODY =
   "V120 A6 6 0 0 1 33 120 V74 H31 V120 A6 6 0 0 1 19 120 V36 H17 V66 A4.5 4.5 0 0 1 8 66 Z";
 
 /*
- * A share of one engineer's week, drawn as one engineer filled from the feet
+ * A share of one engineer's capacity, drawn as one engineer filled from the feet
  * up: a quarter of the figure per capacity unit, so Flex fills to the knees,
  * Core to the waist, and Dedicated the whole person. The same figure the
  * readme pictures blocks with. Decorative: whatever shows it also says the

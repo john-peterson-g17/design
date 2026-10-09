@@ -321,7 +321,7 @@ export const catalog: Group[] = [
       {
         title: "Capacity blocks",
         description:
-          "How to show a capacity block: by its name and its share of an engineer's week, never in hours, with the figure, the card wherever the block is, its popover, and offering blocks to buy. For Exalynt's own tools. What capacity is and how blocks are priced are in the readme.",
+          "How to show a capacity block: by its name and its share of an engineer's capacity, never in hours or weeks, with the figure, the card wherever the block is, its popover, and offering blocks to buy. For Exalynt's own tools. What capacity is and how blocks are priced are in the readme.",
         icon: WidgetsOutlinedIcon,
         Demo: CapacityBlocksGuideline,
       },
@@ -368,7 +368,7 @@ export const catalog: Group[] = [
       {
         title: "CapacityFigure",
         description:
-          "A block's share of one engineer's week, pictured as the readme does: one engineer filled from the feet up, a quarter per capacity unit. Decorative, so always beside the block's name and size in words. `size` is its height; `color` is `primary.main` for the reader's block, `text.secondary` for one not picked.",
+          "A block's share of one engineer's capacity, pictured as the readme does: one engineer filled from the feet up, a quarter per capacity unit. Decorative, so always beside the block's name and size in words. `size` is its height; `color` is `primary.main` for the reader's block, `text.secondary` for one not picked.",
         importFrom: "components",
         phone:
           "Fixed at `size`, 48px tall by default and half as wide, so it reads the same at 375px. Three 80px figures fit side by side on a phone.",
@@ -378,7 +378,7 @@ export const catalog: Group[] = [
       {
         title: "CapacityDetails",
         description:
-          "How big a block is, as CapacityBlock's popover shows it: its figure, name, and share of the week, the hours it's comparable to as a sense of size, that the price is for the block, not hours, and a link to the readme's Engineering Capacity page. `card={false}` drops the card to sit in one of your own.",
+          "How big a block is, as CapacityBlock's popover shows it: its figure, name, and share of an engineer's capacity, the hours it's comparable to as a sense of size, that the price is for the block, not hours, and a link to the readme's Engineering Capacity page. `card={false}` drops the card to sit in one of your own.",
         importFrom: "components",
         phone:
           "The card is 300px wide, or the screen less 24px when that's narrower. With `card={false}` it fills its container.",

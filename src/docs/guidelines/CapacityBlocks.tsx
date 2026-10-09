@@ -73,11 +73,11 @@ export function CapacityBlocksGuideline() {
             <code>CAPACITY_BLOCKS[type].name</code>. Never &ldquo;a 2-unit block&rdquo;.
           </li>
           <li>
-            <strong>Its size as a share of an engineer&rsquo;s week,</strong> from{" "}
-            <code>capacitySize</code>: &ldquo;About ½ of an engineer&rsquo;s week&rdquo;.
-            That&rsquo;s the reference clients already use. The fraction is one character (¼, ½, ¾),
-            never spelled out or written 1/2, and the line is always muted, in{" "}
-            <code>text.secondary</code>, under the block&rsquo;s name.
+            <strong>Its size as a share of an engineer&rsquo;s capacity,</strong> from{" "}
+            <code>capacitySize</code>: &ldquo;About ½ of an engineer&rsquo;s capacity&rdquo;.
+            Capacity is defined over a week, but a block speaks in capacity, never weeks. The
+            fraction is one character (¼, ½, ¾), never spelled out or written 1/2, and the line is
+            always muted, in <code>text.secondary</code>, under the block&rsquo;s name.
           </li>
           <li>
             <strong>Hours only as a sense of size.</strong> A block&rsquo;s{" "}
@@ -104,7 +104,7 @@ export function CapacityBlocksGuideline() {
       <Guidance title="The figure">
         <p>
           <code>CapacityFigure</code> pictures a block the way the readme does: one engineer, filled
-          from the feet up by the block&rsquo;s share of their week. A capacity unit fills a
+          from the feet up by the block&rsquo;s share of their capacity. A capacity unit fills a
           quarter, so Flex fills to the knees, Core to the waist, and Dedicated the whole figure.
           It&rsquo;s decorative, so always put the block&rsquo;s name and size in words beside it.
         </p>
@@ -121,8 +121,8 @@ export function CapacityBlocksGuideline() {
             quarters stop reading, so in a list row write the name instead.
           </li>
           <li>
-            <strong>One figure is one engineer&rsquo;s week,</strong> never several blocks added up.
-            A week&rsquo;s bookings on a schedule are a different picture.
+            <strong>One figure is one engineer&rsquo;s full capacity,</strong> never several blocks
+            added up. Bookings on a schedule are a different picture.
           </li>
         </ul>
       </Guidance>
@@ -281,13 +281,13 @@ export function CapacityBlocksGuideline() {
       <Guidance title="The popover">
         <p>
           A block&rsquo;s name opens <code>CapacityDetails</code> on hover, keyboard focus, or tap:
-          the block&rsquo;s figure and share of the week, the hours it&rsquo;s comparable to, one
-          muted line saying the price is for the block, not hours, and a link to the readme&rsquo;s
-          Engineering Capacity page. It&rsquo;s written for someone who doesn&rsquo;t know what a
-          capacity unit is, so it never says &ldquo;unit&rdquo;. Keep it to that. What a block
-          supports and how it&rsquo;s priced are the readme&rsquo;s to explain. Use{" "}
-          <code>CapacityDetails</code> with <code>card={"{false}"}</code> where a page explains a
-          block in a card of its own.
+          the block&rsquo;s figure and share of an engineer&rsquo;s capacity, the hours it&rsquo;s
+          comparable to, one muted line saying the price is for the block, not hours, and a link to
+          the readme&rsquo;s Engineering Capacity page. It&rsquo;s written for someone who
+          doesn&rsquo;t know what a capacity unit is, so it never says &ldquo;unit&rdquo;. Keep it
+          to that. What a block supports and how it&rsquo;s priced are the readme&rsquo;s to
+          explain. Use <code>CapacityDetails</code> with <code>card={"{false}"}</code> where a page
+          explains a block in a card of its own.
         </p>
       </Guidance>
 

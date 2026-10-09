@@ -14,7 +14,7 @@ export type CapacityDetailsProps = {
 
 /*
  * How big a block is, for the client looking at it: its figure, its name,
- * its share of an engineer's week, the hours it's comparable to as a sense
+ * its share of an engineer's capacity, the hours it's comparable to as a sense
  * of size, and that the price is for the block, not hours. Written for
  * someone who doesn't know what a capacity unit is, so it never says "unit". It's the content
  * of CapacityBlock's popover. What a block supports and how it's priced are
@@ -33,8 +33,7 @@ export function CapacityDetails({ block, link = true, card = true }: CapacityDet
         </Box>
       </Box>
       <Box sx={{ mt: 1.5 }}>
-        Comparable to ~{referenceHours} hours of engineering focus, attention, and effort, over one
-        week.
+        Comparable to ~{referenceHours} hours of engineering focus, attention, and effort.
       </Box>
       <Box
         sx={{

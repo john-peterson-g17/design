@@ -13,7 +13,7 @@ export type CapacityBlockSize = {
   id: CapacityBlockId;
   /** "Flex"; a block is called "Flex block" on screen. */
   name: string;
-  /** Size in capacity units, each a quarter of one engineer's week. */
+  /** Size in capacity units, each a quarter of one engineer's capacity. */
   units: number;
   /**
    * The readme's effort reference: roughly how many hours of engineering
@@ -29,7 +29,7 @@ export const CAPACITY_BLOCKS: Record<CapacityBlockId, CapacityBlockSize> = {
   dedicated: { id: "dedicated", name: "Dedicated", units: 4, referenceHours: 40 },
 };
 
-/** The capacity units in one engineer's week: a full CapacityFigure. */
+/** The capacity units in one engineer's full capacity: a full CapacityFigure. */
 export const WEEK_UNITS = 4;
 
 /*
@@ -43,22 +43,22 @@ export const ICON_GAP = 1;
 /** What capacity is, and the blocks it's sold in. */
 export const CAPACITY_DOCS_URL = "https://readme.exalynt.com/how-it-works/engineering-capacity";
 
-/** A number of units kept to a whole number from 0 to a week's. */
+/** A number of units kept to a whole number from 0 to one engineer's full capacity. */
 export function clampUnits(units: number): number {
   return Math.min(Math.max(Math.round(units), 0), WEEK_UNITS);
 }
 
 /**
- * A size in the words a client already uses, as a share of one engineer's
- * week rather than units or hours, with the fraction as its own character:
- * "About ½ of an engineer's week". Always shown muted, in `text.secondary`.
+ * A size as a share of one engineer's capacity rather than units, hours, or
+ * weeks, with the fraction as its own character: "About ½ of an engineer's
+ * capacity". Always shown muted, in `text.secondary`.
  */
 export function capacitySize(units: number): string {
   return [
-    "None of an engineer's week",
-    "About ¼ of an engineer's week",
-    "About ½ of an engineer's week",
-    "About ¾ of an engineer's week",
-    "About a full engineer's week",
+    "None of an engineer's capacity",
+    "About ¼ of an engineer's capacity",
+    "About ½ of an engineer's capacity",
+    "About ¾ of an engineer's capacity",
+    "About an engineer's full capacity",
   ][clampUnits(units)];
 }
