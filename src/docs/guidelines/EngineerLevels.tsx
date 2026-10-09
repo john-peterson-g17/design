@@ -81,9 +81,8 @@ export function EngineerLevelsGuideline() {
       <Guidance title="The popover">
         <p>
           A badge opens <code>EngineerLevelDetails</code> on hover, keyboard focus, or tap: the four
-          levels&rsquo; squares with this one a step brighter, what an engineer at it leads, in the
-          readme&rsquo;s words, a short muted line on what a level is, and a link to the level in
-          the readme. Keep it to that.
+          levels&rsquo; squares with this one a step brighter, what an engineer at it leads, a short
+          muted line on what a level is, and a link to the level in the readme. Keep it to that.
         </p>
         <ul>
           <li>

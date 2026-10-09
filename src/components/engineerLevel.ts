@@ -1,6 +1,6 @@
 // Exalynt's engineer levels: Associate, Mid, Senior, and Principal. The names
-// and what each level leads mirror the readme's src/data/exalynt.ts
-// (LEVELS). What the levels mean, how they're set, and how someone grows
+// and what each level leads are defined here, and the readme installs this
+// package to show them, as it does the stability levels. What the levels mean, how they're set, and how someone grows
 // between them are the readme's to explain (ENGINEER_LEVEL_DOCS_URL), and the
 // Engineer Share each one sets is for engineers, so none of that is here.
 
@@ -12,7 +12,7 @@ export type EngineerLevel = {
   id: EngineerLevelId;
   /** "Senior"; an engineer is "a Senior engineer" in running text. */
   name: string;
-  /** The kinds of problems an engineer at this level leads, as a strength, in the readme's words. */
+  /** The kinds of problems an engineer at this level leads, as a strength. */
   summary: string;
 };
 
