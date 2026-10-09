@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { Theme } from "@mui/material/styles";
-import { DataTable, SectionCard } from "../../components";
+import { DataTable, SectionCard, formatMoney } from "../../components";
 import { CodeBlock } from "../CodeBlock";
 import { Example } from "../Example";
 import { invoiceColumns, invoices } from "../invoices";
@@ -33,7 +33,7 @@ function InvoiceRows() {
           />
           <Stack spacing={0.5} sx={{ alignItems: "flex-end", flexShrink: 0 }}>
             <Typography variant="body2" sx={{ fontWeight: 600 }}>
-              ${invoice.amount.toLocaleString("en-US")}
+              {formatMoney(invoice.amount)}
             </Typography>
             <Chip
               label={invoice.status}

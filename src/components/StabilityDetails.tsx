@@ -107,17 +107,16 @@ export function StabilityDetails({
       <Box sx={{ mt: 1.25 }}>
         <LevelBoxes level={level} />
       </Box>
-      <Box sx={{ mt: 1.5 }}>
-        {feature ? (
-          <>
-            <Box component="strong" sx={{ fontWeight: 600 }}>
-              {feature}
-            </Box>{" "}
-            is in {fullName}.{" "}
-          </>
-        ) : null}
-        {summary}
-      </Box>
+      {/* What it's on, then the level's definition on a line of its own. */}
+      {feature ? (
+        <Box sx={{ mt: 1.5 }}>
+          <Box component="strong" sx={{ fontWeight: 600 }}>
+            {feature}
+          </Box>{" "}
+          is in {fullName}.
+        </Box>
+      ) : null}
+      <Box sx={{ mt: feature ? 0.75 : 1.5 }}>{summary}</Box>
       <Box
         sx={{
           mt: 1.5,

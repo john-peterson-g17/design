@@ -1,5 +1,5 @@
 import Chip from "@mui/material/Chip";
-import type { Column } from "../components";
+import { formatMoney, type Column } from "../components";
 
 /* Made-up invoices for the table demos and guidelines. */
 
@@ -9,6 +9,7 @@ export type Invoice = {
   client: string;
   /** ISO date, so it sorts as text. */
   issued: string;
+  /** In cents, as the API sends it. */
   amount: number;
   status: "Paid" | "Due" | "Overdue";
 };
@@ -28,15 +29,10 @@ export const invoices: Invoice[] = Array.from({ length: 32 }, (_, i) => ({
   project: PROJECTS[i % PROJECTS.length],
   client: CLIENTS[(i * 3) % CLIENTS.length],
   issued: new Date(Date.UTC(2026, 0, 5 + i * 4)).toISOString().slice(0, 10),
-  amount: 1200 + ((i * 7919) % 40) * 200,
+  amount: (1200 + ((i * 7919) % 40) * 200) * 100 + ((i * 37) % 4) * 25,
   status: i % 5 === 0 ? "Overdue" : i % 3 === 0 ? "Due" : "Paid",
 }));
 
-const money = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
 const day = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
 
 const statusColor = { Paid: "success", Due: "warning", Overdue: "error" } as const;
@@ -73,7 +69,8 @@ export const invoiceColumns: Column<Invoice>[] = [
     header: "Amount",
     align: "right",
     value: (row) => row.amount,
-    render: (row) => money.format(row.amount),
+    render: (row) => formatMoney(row.amount),
+    sx: { fontVariantNumeric: "tabular-nums" },
     sortable: true,
   },
 ];

@@ -154,7 +154,8 @@ export function FormsGuideline() {
             <strong>A number or amount</strong>: <code>TextField</code> with{" "}
             <code>inputMode: &quot;decimal&quot;</code> and the unit as an{" "}
             <code>InputAdornment</code>. Not <code>type=&quot;number&quot;</code>, which changes the
-            value when someone scrolls over it.
+            value when someone scrolls over it. For money, turn the text into cents with{" "}
+            <code>parseMoney</code>, as <a href="#Money">Money</a> shows.
           </li>
           <li>
             <strong>One of two to five, all worth seeing at once</strong>: <code>RadioGroup</code>.

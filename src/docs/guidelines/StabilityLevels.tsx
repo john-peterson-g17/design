@@ -118,6 +118,11 @@ export function StabilityLevelsGuideline() {
         </p>
         <ul>
           <li>
+            <strong>No mark means GA.</strong> GA is the default, so only Prototype, Alpha, and Beta
+            get a mark. The one exception is Exalynt&rsquo;s own tools, where clients follow the
+            stability of the Features we&rsquo;re working on for them (see Where to show it, below).
+          </li>
+          <li>
             <strong>The Track and the name carry the level, not the color.</strong> They read the
             same in grayscale and for people with color blindness. Color is a third signal on top.
           </li>
@@ -371,14 +376,16 @@ export function StabilityLevelsGuideline() {
       <Guidance title="Where to show it">
         <ul>
           <li>
-            <strong>In a product, for end users:</strong> mark Prototype, Alpha, and Beta.{" "}
-            <strong>GA shows nothing.</strong> GA is what people expect by default, so a mark on
-            everything would hide the ones that matter.
+            <strong>Everywhere, no mark means GA.</strong> In client products, on the web and on
+            phones, and anywhere else people use what we build, mark only Prototype, Alpha, and
+            Beta. Never show a GA mark or a GA banner: GA is what people expect by default, so the
+            missing mark already says it, and a mark on everything would hide the ones that matter.
           </li>
           <li>
-            <strong>In the client app, for clients reviewing work:</strong> show every level, GA
-            included. Clients are deciding what they can rely on, so every Capability&rsquo;s level
-            is information.
+            <strong>The one exception is Exalynt&rsquo;s own tools,</strong> such as the portal,
+            where clients follow the stability of the Features we&rsquo;re working on for them.
+            There, show every Capability&rsquo;s level, GA included, since clients are deciding what
+            they can rely on. Nowhere else shows GA.
           </li>
           <li>
             <strong>Put the mark on the thing that has the level.</strong> Mark Capabilities beside
@@ -387,12 +394,13 @@ export function StabilityLevelsGuideline() {
           </li>
           <li>
             <strong>Inside a button or link,</strong> put the short mark after the label, with{" "}
-            <code>focusable={"{false}"}</code>. That includes a list row that opens something and a
-            phone&rsquo;s bottom tabs.
+            <code>focusable={"{false}"}</code>. That includes a list row that opens something.
           </li>
           <li>
             <strong>On a phone,</strong> put the extra-long mark under a screen&rsquo;s title rather
-            than beside it, and drop to the short mark wherever a name would wrap.
+            than beside it, and drop to the short mark wherever a name would wrap.{" "}
+            <strong>Bottom tabs carry no mark.</strong> Their labels are too small and too tight for
+            one, so the screen each tab opens shows the level under its title instead.
           </li>
         </ul>
       </Guidance>

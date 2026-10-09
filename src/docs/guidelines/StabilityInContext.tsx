@@ -26,17 +26,30 @@ import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import { StabilityBanner, StabilityMark, type StabilityLevelId } from "../../components";
 
 /* The stability identifiers in made-up products: Northwind Ops on the web and
-   on a phone, and the Exalynt client app. */
+   on a phone, and Exalynt's own tools, the one place GA is shown. */
 
 type NavItem = { name: string; level?: StabilityLevelId; on?: boolean };
 
-function Figure({ caption, children }: { caption: ReactNode; children: ReactNode }) {
+/* A mockup with its caption under it, so mockups side by side line up at
+   the top however long their captions run. */
+function Figure({
+  caption,
+  maxWidth,
+  children,
+}: {
+  caption: ReactNode;
+  maxWidth?: number;
+  children: ReactNode;
+}) {
   return (
-    <Box component="figure" sx={{ m: 0, display: "flex", flexDirection: "column", gap: 1 }}>
+    <Box
+      component="figure"
+      sx={{ m: 0, mx: "auto", maxWidth, display: "flex", flexDirection: "column", gap: 1 }}
+    >
+      {children}
       <Typography component="figcaption" variant="caption" sx={{ color: "text.secondary" }}>
         {caption}
       </Typography>
-      {children}
     </Box>
   );
 }
@@ -176,14 +189,14 @@ function SampleAnswer() {
   );
 }
 
-/* Web apps: the end-user product, where GA shows nothing, a Prototype page
-   with a banner, and the client app, where every level shows. */
+/* Web apps: the end-user product, where no mark means GA, a Prototype page
+   with a banner, and Exalynt's own tools, where every level shows. */
 export function WebApps() {
   return (
     <Grid container spacing={2}>
       <Grid size={12}>
         <WebWindow
-          caption="For end users: short marks in the side nav, the extra-long mark beside the page title, long marks in the table, and a short one in a button. GA shows nothing."
+          caption="For end users: short marks in the side nav, the extra-long mark beside the page title, long marks in the table, and a short one in a button. Monthly rollup is GA, so it has no mark."
           brandName="Northwind Ops"
           nav={northwindNav("Forecasts")}
         >
@@ -250,7 +263,7 @@ export function WebApps() {
       </Grid>
       <Grid size={{ xs: 12, md: 6 }}>
         <WebWindow
-          caption="The client app, for clients reviewing work: every Capability's long mark, GA included."
+          caption="Exalynt's own tools, where clients follow the Features we're working on for them: the only place GA is shown, beside every Capability."
           brandName="Exalynt"
           nav={[{ name: "Iterations" }, { name: "Features", on: true }, { name: "Estimates" }]}
         >
@@ -284,12 +297,13 @@ export function WebApps() {
   );
 }
 
-const PHONE_TABS: { name: string; level?: StabilityLevelId; Icon: ComponentType<SvgIconProps> }[] =
-  [
-    { name: "Today", Icon: HomeOutlinedIcon },
-    { name: "Forecasts", level: "beta", Icon: InsightsOutlinedIcon },
-    { name: "Assistant", level: "prototype", Icon: AutoAwesomeOutlinedIcon },
-  ];
+/* Bottom tabs carry no marks: there's no room beside a tab's label, and the
+   screen a tab opens shows its level under the title. */
+const PHONE_TABS: { name: string; Icon: ComponentType<SvgIconProps> }[] = [
+  { name: "Today", Icon: HomeOutlinedIcon },
+  { name: "Forecasts", Icon: InsightsOutlinedIcon },
+  { name: "Assistant", Icon: AutoAwesomeOutlinedIcon },
+];
 
 /* A phone screen, small: an app bar with the screen's title, the screen, and
    the bottom tabs if `tab` is given. */
@@ -309,14 +323,11 @@ function PhoneScreen({
   children: ReactNode;
 }) {
   return (
-    <Figure caption={caption}>
+    <Figure caption={caption} maxWidth={300}>
       <Paper
         variant="outlined"
         sx={{
-          width: "100%",
-          maxWidth: 300,
           minHeight: 480,
-          mx: "auto",
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
@@ -338,23 +349,13 @@ function PhoneScreen({
         </Box>
         {tab ? (
           <BottomNavigation showLabels value={tab} sx={{ borderTop: 1, borderColor: "divider" }}>
-            {PHONE_TABS.map(({ name, level, Icon }) => (
+            {PHONE_TABS.map(({ name, Icon }) => (
               <BottomNavigationAction
                 key={name}
                 value={name}
+                label={name}
                 icon={<Icon />}
-                sx={{ minWidth: 0, px: 0.5 }}
-                label={
-                  <Box
-                    component="span"
-                    sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}
-                  >
-                    {name}
-                    {level ? (
-                      <StabilityMark level={level} feature={name} size="short" focusable={false} />
-                    ) : null}
-                  </Box>
-                }
+                sx={{ minWidth: 0 }}
               />
             ))}
           </BottomNavigation>
@@ -363,6 +364,10 @@ function PhoneScreen({
     </Figure>
   );
 }
+
+/* List rows at the phone mockup's scale, under its 16px screen title. */
+const ROW_PRIMARY = { sx: { fontSize: 14, fontWeight: 500 } };
+const ROW_SECONDARY = { sx: { fontSize: 13 } };
 
 const PHONE_CAPABILITIES: [string, StabilityLevelId, string][] = [
   ["Monthly rollup", "ga", "Revenue by month, to date."],
@@ -382,7 +387,7 @@ export function MobileApps() {
     <Grid container spacing={2}>
       <Grid size={{ xs: 12, sm: 6, md: 4 }}>
         <PhoneScreen
-          caption="Short marks on the tabs, the extra-long mark under the screen's title, long marks beside rows, and a short one in a button. GA shows nothing."
+          caption="The extra-long mark under the screen's title, long marks beside rows, and a short one in a button. The bottom tabs carry none, and Monthly rollup is GA, so it has none either."
           title="Revenue forecast"
           belowTitle={<StabilityMark level="beta" feature="Revenue forecast" size="extra-long" />}
           tab="Forecasts"
@@ -408,6 +413,7 @@ export function MobileApps() {
                     </Box>
                   }
                   secondary={description}
+                  slotProps={{ primary: ROW_PRIMARY, secondary: ROW_SECONDARY }}
                   sx={{ my: 0 }}
                 />
                 <ChevronRightIcon fontSize="small" sx={{ color: "text.secondary" }} />
@@ -449,7 +455,8 @@ export function MobileApps() {
             {EARLY_ACCESS.map(([name, level, description, on]) => (
               <ListItem
                 key={name}
-                sx={{ px: 2 }}
+                /* MUI's 48px for a secondary action is narrower than a switch. */
+                sx={{ pl: 2, pr: 9 }}
                 secondaryAction={
                   <Switch
                     edge="end"
@@ -474,6 +481,7 @@ export function MobileApps() {
                     </Box>
                   }
                   secondary={description}
+                  slotProps={{ primary: ROW_PRIMARY, secondary: ROW_SECONDARY }}
                   sx={{ my: 0 }}
                 />
               </ListItem>
@@ -492,7 +500,7 @@ const WHERE: [string, string, string][] = [
   [
     "Short mark",
     "Side nav and tab items, menu items, and buttons.",
-    "Bottom tabs and buttons, and any row too tight for the name.",
+    "Buttons, and any row too tight for the name. Not bottom tabs: the screen they open shows the level.",
   ],
   [
     "Long mark",
@@ -508,6 +516,11 @@ const WHERE: [string, string, string][] = [
     "StabilityBanner",
     "Under PageHeader, on the rare page that needs it, in place of the title's mark.",
     "At the top of the screen, under the app bar, with one or two short sentences.",
+  ],
+  [
+    "GA",
+    "Nothing: no mark means GA. Only Exalynt's own tools, where clients follow the Features we're working on, mark it.",
+    "Nothing: no mark means GA.",
   ],
   [
     "StabilityDetails",

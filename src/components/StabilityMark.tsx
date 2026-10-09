@@ -33,6 +33,9 @@ export type StabilityMarkProps = {
  * A stability level's mark: the Track and the level's name, in the level's
  * color, with a popover (hover, focus, or tap) saying how stable it is.
  * It's text, not a badge, sized in em to sit beside the text around it.
+ *
+ * No mark means GA. Render one for GA only in Exalynt's own tools, where
+ * clients follow the stability of the Features being built for them.
  */
 export function StabilityMark({
   level,

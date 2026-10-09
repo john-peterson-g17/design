@@ -12,7 +12,7 @@ import { ReadmeLink } from "../ReadmeLink";
 const ROWS: [string, string, string][] = [
   [
     "Shown as",
-    "One of four levels by name: StabilityMark, the Track and the level's name. Never a percentage.",
+    "One of four levels by name: StabilityMark, the Track and the level's name. Never a percentage. No mark means GA, except in Exalynt's own tools.",
     "Always a percentage: MaturityRing, always a ring, never a bar or boxes.",
   ],
   [

@@ -3,7 +3,13 @@
 // like whichever brand that theme is.
 
 export * from "./CalloutPanel";
+export * from "./CapacityBlock";
+export * from "./CapacityDetails";
+export * from "./CapacityFigure";
+export * from "./CapacityLine";
+export * from "./CapacityPlacement";
 export * from "./ConfirmDialog";
+export * from "./DateTime";
 export * from "./EmptyState";
 export * from "./MaturityDetails";
 export * from "./MaturityRing";
@@ -28,6 +34,8 @@ export {
   type StabilityLevel,
   type StabilityLevelId,
 } from "./stability";
+// Money: the API's cents, as text for the reader and back.
+export { formatMoney, parseMoney, type MoneyOptions } from "./money";
 export {
   HEALTHY_MATURITY,
   MATURITY_BANDS,
@@ -36,3 +44,15 @@ export {
   maturityBand,
   projectMaturity,
 } from "./maturity";
+
+// Capacity blocks: their names and sizes. What capacity is, and how blocks are
+// priced, is the readme's (CAPACITY_DOCS_URL).
+export {
+  CAPACITY_BLOCKS,
+  CAPACITY_BLOCK_IDS,
+  CAPACITY_DOCS_URL,
+  WEEK_UNITS,
+  capacitySize,
+  type CapacityBlockId,
+  type CapacityBlockSize,
+} from "./capacity";

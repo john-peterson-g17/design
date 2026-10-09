@@ -12,7 +12,7 @@ const cleared = {
 };
 
 /*
- * The popover a stability mark or a maturity opens on hover, focus, or tap.
+ * The popover a stability mark, a maturity, or a DateTime opens on hover, focus, or tap.
  * Its content draws its own card (DetailsCard), so the tooltip's is cleared.
  */
 export function DetailsPopover({ title, children }: { title: ReactNode; children: ReactElement }) {

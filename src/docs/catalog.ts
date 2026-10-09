@@ -3,7 +3,14 @@ import type { SvgIconProps } from "@mui/material/SvgIcon";
 import GridOnOutlinedIcon from "@mui/icons-material/GridOnOutlined";
 import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
 import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
+import ViewWeekOutlinedIcon from "@mui/icons-material/ViewWeekOutlined";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import TableChartOutlinedIcon from "@mui/icons-material/TableChartOutlined";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
+import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined";
+import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import CampaignOutlinedIcon from "@mui/icons-material/CampaignOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ContrastOutlinedIcon from "@mui/icons-material/ContrastOutlined";
@@ -13,6 +20,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import InboxOutlinedIcon from "@mui/icons-material/InboxOutlined";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
+import PaymentsOutlinedIcon from "@mui/icons-material/PaymentsOutlined";
 import ManageSearchOutlinedIcon from "@mui/icons-material/ManageSearchOutlined";
 import PaletteOutlinedIcon from "@mui/icons-material/PaletteOutlined";
 import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
@@ -23,7 +31,13 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import WebAssetOutlinedIcon from "@mui/icons-material/WebAssetOutlined";
 import { CalloutPanelDemo } from "../components/CalloutPanel.demo";
+import { CapacityBlockDemo } from "../components/CapacityBlock.demo";
+import { CapacityDetailsDemo } from "../components/CapacityDetails.demo";
+import { CapacityFigureDemo } from "../components/CapacityFigure.demo";
+import { CapacityLineDemo } from "../components/CapacityLine.demo";
+import { CapacityPlacementDemo } from "../components/CapacityPlacement.demo";
 import { ConfirmDialogDemo } from "../components/ConfirmDialog.demo";
+import { DateTimeDemo } from "../components/DateTime.demo";
 import { EmptyStateDemo } from "../components/EmptyState.demo";
 import { PageHeaderDemo } from "../components/PageHeader.demo";
 import { SearchSelectDemo } from "../components/SearchSelect.demo";
@@ -40,7 +54,10 @@ import { ListTableDemo } from "../components/table/ListTable.demo";
 import { Mark } from "../exalynt";
 import { BrandDemo } from "../exalynt/Brand.demo";
 import { PaletteDemo } from "./foundations/Palette";
+import { CapacityBlocksGuideline } from "./guidelines/CapacityBlocks";
+import { DatesAndTimesGuideline } from "./guidelines/DatesAndTimes";
 import { FormsGuideline } from "./guidelines/Forms";
+import { MoneyGuideline } from "./guidelines/Money";
 import { MuiFirstGuideline } from "./guidelines/MuiFirst";
 import { PagesGuideline } from "./guidelines/Pages";
 import { TablesGuideline } from "./guidelines/Tables";
@@ -182,6 +199,32 @@ export const catalog: Group[] = [
         icon: InboxOutlinedIcon,
         Demo: EmptyStateDemo,
       },
+      {
+        title: "Dates and times",
+        description:
+          "The API sends every point in time as an RFC 3339 timestamp in UTC. Pages show it in the reader's own time zone and locale with DateTime, and keep calendar dates, which aren't moments, as the day they are.",
+        icon: CalendarMonthOutlinedIcon,
+        Demo: DatesAndTimesGuideline,
+      },
+      {
+        title: "DateTime",
+        description:
+          "A timestamp from the server in the reader's time zone and locale, from their browser, with a popover giving it in full in their zone and in UTC as sent. `value` is an RFC 3339 UTC string; anything else, a calendar date included, is shown as given. `dateOnly` drops the time of day; pass `focusable={false}` inside a button or link.",
+        importFrom: "components",
+        phone:
+          "It never wraps, so a date and time stays on one line in a table cell. A tap opens the popover, which is 300px wide at most and keeps 12px from the screen's edges.",
+        icon: AccessTimeOutlinedIcon,
+        Demo: DateTimeDemo,
+      },
+      {
+        title: "Money",
+        description:
+          "The API sends and takes every amount as whole cents, never a decimal. Pages keep it in cents and show it with `formatMoney`, in the reader's locale and the amount's currency, and turn what someone types back into cents with `parseMoney`.",
+        phone:
+          "Nothing changes by screen size. A rounded headline figure in a StatCard is the one place to drop the cents when space is tight.",
+        icon: PaymentsOutlinedIcon,
+        Demo: MoneyGuideline,
+      },
     ],
   },
   {
@@ -197,7 +240,7 @@ export const catalog: Group[] = [
       {
         title: "StabilityMark",
         description:
-          "A stability level's mark: the Track and the level's name in the level's color, with a popover telling the client how stable it is. Pass `feature` so it opens with \"Invoice export is in Alpha.\" `size` is `short`, `long`, or `extra-long`; pass `focusable={false}` inside a button or link.",
+          "A stability level's mark: the Track and the level's name in the level's color, with a popover telling the client how stable it is. No mark means GA, so pass `ga` only in Exalynt's own tools, where clients follow the Features we're working on. Pass `feature` so it opens with \"Invoice export is in Alpha.\" `size` is `short`, `long`, or `extra-long`; pass `focusable={false}` inside a button or link.",
         importFrom: "components",
         phone:
           "It's sized in em, so it scales with the text beside it and never wraps. A tap opens the popover, which is 300px wide at most and keeps 12px from the screen's edges. Where a row is tight on a phone, drop to the short mark rather than let the name wrap.",
@@ -255,6 +298,68 @@ export const catalog: Group[] = [
           "The card is 300px wide, or the screen less 24px when that's narrower. With `card={false}` it fills its container.",
         icon: ChatBubbleOutlineOutlinedIcon,
         Demo: MaturityDetailsDemo,
+      },
+    ],
+  },
+  {
+    title: "Capacity",
+    entries: [
+      {
+        title: "Capacity blocks",
+        description:
+          "How to show a capacity block: by its name and its share of an engineer's week, never in hours, with the figure, the card wherever the block is, its popover, and offering blocks to buy. For Exalynt's own tools. What capacity is and how blocks are priced are in the readme.",
+        icon: WidgetsOutlinedIcon,
+        Demo: CapacityBlocksGuideline,
+      },
+      {
+        title: "CapacityBlock",
+        description:
+          "A capacity block as a card, the same wherever it is: its figure, its name, which opens CapacityDetails, and its size in words, then `children`, normally CapacityPlacement (its project and focus), and `footer` (when it's worked on). `selected`, `scheduled`, `preview`, `faded`, and `locked` are its states; `onClick` and `onDragStart` make it act. One card per block.",
+        importFrom: "components",
+        phone:
+          "It fills its container's width, and long project names are cut short rather than wrapping. Put cards in a Grid with `size={{ xs: 12, sm: 4 }}` so they stack on phones. Dragging doesn't work on touch, so give a phone another way to schedule, such as the footer's Schedule button.",
+        icon: ViewWeekOutlinedIcon,
+        Demo: CapacityBlockDemo,
+      },
+      {
+        title: "CapacityPlacement",
+        description:
+          "Where a block goes, as two lines for CapacityBlock's children: its project, then its focus. With no project it asks to be assigned one and holds the focus line, disabled; on a project with no focus it follows Up next. `onProjectClick` and `onFocusClick` open the app's pickers; without them the lines are read-only.",
+        importFrom: "components",
+        phone:
+          "It fills the card's width, and long names are cut short with an ellipsis, saying them in full on hover. Each line is a small MUI button, the same height as the portal's other inline controls; the picker it opens should use SearchSelect, whose rows are 48px on phones.",
+        icon: AccountTreeOutlinedIcon,
+        Demo: CapacityPlacementDemo,
+      },
+      {
+        title: "CapacityLine",
+        description:
+          "One line on a block's card: an 18px icon centred in a column as wide as the figure, so every line's icon sits on the figure's axis in every state, then text cut short with an ellipsis. Read-only by default; `onClick` makes it a button, `menu` adds the chevron, `action` is the primary prompt, and `disabled` and `muted` hold a place. Build a block's footer from it.",
+        importFrom: "components",
+        phone:
+          "It fills the card's width, and long text is cut short, said in full in its `hint`. Every line is the same height, so changing state never moves the lines below.",
+        icon: FormatListBulletedOutlinedIcon,
+        Demo: CapacityLineDemo,
+      },
+      {
+        title: "CapacityFigure",
+        description:
+          "A block's share of one engineer's week, pictured as the readme does: one engineer filled from the feet up, a quarter per capacity unit. Decorative, so always beside the block's name and size in words. `size` is its height; `color` is `primary.main` for the reader's block, `text.secondary` for one not picked.",
+        importFrom: "components",
+        phone:
+          "Fixed at `size`, 48px tall by default and half as wide, so it reads the same at 375px. Three 80px figures fit side by side on a phone.",
+        icon: AccessibilityNewOutlinedIcon,
+        Demo: CapacityFigureDemo,
+      },
+      {
+        title: "CapacityDetails",
+        description:
+          "How big a block is, as CapacityBlock's popover shows it: its figure, name, and share of the week, the hours it's comparable to as a sense of size, that the price is for the block, not hours, and a link to the readme's Engineering Capacity page. `card={false}` drops the card to sit in one of your own.",
+        importFrom: "components",
+        phone:
+          "The card is 300px wide, or the screen less 24px when that's narrower. With `card={false}` it fills its container.",
+        icon: ChatBubbleOutlineOutlinedIcon,
+        Demo: CapacityDetailsDemo,
       },
     ],
   },
