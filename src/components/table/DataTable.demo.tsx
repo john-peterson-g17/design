@@ -4,6 +4,7 @@ import { CodeBlock } from "../../docs/CodeBlock";
 import { Example } from "../../docs/Example";
 import { invoiceColumns, invoices, type Invoice } from "../../docs/invoices";
 import { SectionCard } from "../SectionCard";
+import { CursorPagedInvoices } from "./CursorPager.demo";
 import { DataTable, type TableSort } from "./DataTable";
 
 const rows = invoices.slice(0, 6);
@@ -66,6 +67,26 @@ export function DataTableDemo() {
   onSort={(column) => setSort(nextSort(column))}
   striped={false}              // stripes are on by default
 />`}
+      />
+
+      <Example title="Paged by the server, by cursor (CursorPager)">
+        <CursorPagedInvoices />
+      </Example>
+      <CodeBlock
+        code={`<SectionCard title="Invoices" disableContentPadding>
+  <DataTable columns={columns} rows={data.items} rowKey={(row) => row.id} />
+  <Divider />
+  <CursorPager
+    page={page}                        // pages stepped forward from the first
+    pageSize={pageSize}
+    count={data.items.length}
+    hasNext={data.nextCursor !== null}
+    onPrevious={() => setCursors((c) => c.slice(0, -1))}
+    onNext={() => setCursors((c) => [...c, data.nextCursor])}
+    onPageSizeChange={(size) => { setPageSize(size); setCursors([null]); }}
+    noun={{ one: "invoice", other: "invoices" }}
+  />
+</SectionCard>`}
       />
     </>
   );

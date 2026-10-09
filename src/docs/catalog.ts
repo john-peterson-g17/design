@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import type { SvgIconProps } from "@mui/material/SvgIcon";
+import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import GridOnOutlinedIcon from "@mui/icons-material/GridOnOutlined";
 import TableRowsOutlinedIcon from "@mui/icons-material/TableRowsOutlined";
 import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
@@ -51,6 +52,7 @@ import { StabilityDetailsDemo } from "../components/StabilityDetails.demo";
 import { StabilityMarkDemo } from "../components/StabilityMark.demo";
 import { ThemeToggleDemo } from "../components/ThemeToggle.demo";
 import { ToastProviderDemo } from "../components/ToastProvider.demo";
+import { CursorPagerDemo } from "../components/table/CursorPager.demo";
 import { DataTableDemo } from "../components/table/DataTable.demo";
 import { ListTableDemo } from "../components/table/ListTable.demo";
 import { Mark } from "../exalynt";
@@ -412,6 +414,16 @@ export const catalog: Group[] = [
           "Wider than the screen, it scrolls inside its own container. A column with `hideBelow` drops out instead, and while one does the table lets go of its minimum width so the rest fits.",
         icon: GridOnOutlinedIcon,
         Demo: DataTableDemo,
+      },
+      {
+        title: "CursorPager",
+        description:
+          "A DataTable's footer when the server pages its rows by cursor: the range showing, the page size, and previous and next, since a cursor only steps to the page beside it and there's no total to number pages by. The caller fetches each page and keeps the cursors behind it. For rows the app has in full, ListTable's `pagination` numbers the pages instead.",
+        importFrom: "components",
+        phone:
+          "Like ListTable's footer: the Per page picker hides below sm, and the arrows wrap under the range if they don't fit beside it. They keep MUI's tap size.",
+        icon: SwapHorizOutlinedIcon,
+        Demo: CursorPagerDemo,
       },
     ],
   },

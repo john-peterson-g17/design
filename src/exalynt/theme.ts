@@ -331,6 +331,28 @@ export const theme = createTheme({
       },
     },
 
+    /* The current page is a primary text button's hover, held: a faint wash of
+       the primary blue behind a blue number, rather than MUI's solid fill,
+       which shouted louder than the table above it. */
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: ({ theme: t }) => {
+          const wash = (opacity: number) =>
+            `rgba(${t.vars.palette.primary.mainChannel} / ${opacity})`;
+          return {
+            "&.Mui-selected": {
+              fontWeight: 600,
+              color: t.vars.palette.primary.main,
+              backgroundColor: wash(t.vars.palette.action.hoverOpacity),
+              "&:hover, &.Mui-focusVisible": {
+                backgroundColor: wash(t.vars.palette.action.selectedOpacity),
+              },
+            },
+          };
+        },
+      },
+    },
+
     MuiListItemIcon: {
       styleOverrides: {
         root: {

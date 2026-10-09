@@ -6,9 +6,11 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type { Theme } from "@mui/material/styles";
-import { DataTable, SectionCard, formatMoney } from "../../components";
+import { DataTable, ListTable, SectionCard, formatMoney } from "../../components";
+import { CursorPagedInvoices } from "../../components/table/CursorPager.demo";
 import { CodeBlock } from "../CodeBlock";
 import { Example } from "../Example";
+import { Guidance } from "../Guidance";
 import { invoiceColumns, invoices } from "../invoices";
 import { Rules } from "./Rules";
 
@@ -59,6 +61,7 @@ export function TablesGuideline() {
           "Scrolls inside its own container on a narrow screen, so the page never scrolls sideways. The theme's 560px minimum width stops columns squeezing to one word per line.",
           "On phones, either hides its secondary columns with hideBelow, or becomes a list of rows as cards. Use the list when each row is read on its own, and scrolling when people compare across rows.",
           "Inside a SectionCard, uses disableContentPadding so it runs to the card's edges. ListTable brings its own card.",
+          "Pages its rows where they're held. Rows the app has in full get ListTable's numbered pages; rows a server pages by cursor get a DataTable with a CursorPager under it.",
         ]}
       />
 
@@ -86,6 +89,46 @@ export function TablesGuideline() {
       <CodeBlock
         code={`const phone = useMediaQuery((theme: Theme) => theme.breakpoints.down("sm"));
 return phone ? <List>…</List> : <DataTable … />;`}
+      />
+
+      <Guidance title="Paging">
+        <p>
+          How a table pages follows from where its rows are. When the app has every row, as a short
+          list does, <a href="#ListTable">ListTable</a>&apos;s <code>pagination</code> numbers the
+          pages and can jump to any of them, since it knows the total.
+        </p>
+        <p>
+          When the server pages the rows by cursor, as long or growing lists do, each page comes
+          with a cursor to the next, and nothing says how many pages there are. Put a{" "}
+          <a href="#CursorPager">CursorPager</a> under a <a href="#DataTable">DataTable</a>: it
+          steps back and forward one page at a time, and the page keeps the cursors it has used so
+          Previous can return to them.
+        </p>
+      </Guidance>
+
+      <Example title="Numbered pages: rows the app has in full">
+        <ListTable
+          title="Invoices"
+          noun={{ one: "invoice", other: "invoices" }}
+          columns={invoiceColumns}
+          rows={invoices}
+          rowKey={(row) => row.number}
+          pagination
+        />
+      </Example>
+      <CodeBlock
+        code={`<ListTable title="Invoices" noun={noun} columns={columns} rows={invoices} rowKey={(row) => row.number} pagination />`}
+      />
+
+      <Example title="Previous and next: rows a server pages by cursor">
+        <CursorPagedInvoices />
+      </Example>
+      <CodeBlock
+        code={`<SectionCard title="Invoices" disableContentPadding>
+  <DataTable columns={columns} rows={data.items} rowKey={(row) => row.id} />
+  <Divider />
+  <CursorPager page={page} pageSize={pageSize} count={data.items.length} hasNext={data.nextCursor !== null} … />
+</SectionCard>`}
       />
     </>
   );
