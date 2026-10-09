@@ -1,8 +1,4 @@
-import { Fragment, type ReactNode } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -12,9 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import {
   STABILITY_LEVELS,
+  StabilityBanner,
   StabilityDetails,
   StabilityMark,
-  type StabilityLevelId,
   type StabilityMarkSize,
 } from "../../components";
 import { brand } from "../../exalynt";
@@ -23,6 +19,7 @@ import { Example } from "../Example";
 import { Guidance } from "../Guidance";
 import { ReadmeLink } from "../ReadmeLink";
 import { StabilityAndMaturity } from "./StabilityAndMaturity";
+import { MobileApps, WebApps, WhereTable } from "./StabilityInContext";
 
 const SIZES: { size: StabilityMarkSize; name: string; shows: string; use: string }[] = [
   {
@@ -88,204 +85,6 @@ function Swatch({ color, surfaces }: { color: string; surfaces: string[] }) {
         {contrast(color, surfaces)}
       </Typography>
     </Box>
-  );
-}
-
-/* A product window, small: a bar of tabs over a body. */
-function Mockup({
-  caption,
-  brandName,
-  tabs,
-  children,
-}: {
-  caption: ReactNode;
-  brandName: string;
-  tabs: { name: string; level?: StabilityLevelId; on?: boolean }[];
-  children: ReactNode;
-}) {
-  return (
-    <Box component="figure" sx={{ m: 0, display: "flex", flexDirection: "column", gap: 1 }}>
-      <Typography component="figcaption" variant="caption" sx={{ color: "text.secondary" }}>
-        {caption}
-      </Typography>
-      <Paper variant="outlined" sx={{ overflow: "hidden", fontSize: 13 }}>
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: "6px 16px",
-            px: 2,
-            py: 1.25,
-            color: "text.secondary",
-            borderBottom: 1,
-            borderColor: "divider",
-          }}
-        >
-          <Box component="strong" sx={{ color: "text.primary" }}>
-            {brandName}
-          </Box>
-          {tabs.map((tab) => (
-            <Box
-              key={tab.name}
-              component="span"
-              sx={[
-                { display: "inline-flex", alignItems: "center", gap: 0.75 },
-                !!tab.on && { fontWeight: 600, color: "text.primary" },
-              ]}
-            >
-              {tab.name}
-              {tab.level ? (
-                <StabilityMark level={tab.level} feature={tab.name} size="short" />
-              ) : null}
-            </Box>
-          ))}
-        </Box>
-        <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 1.5 }}>{children}</Box>
-      </Paper>
-    </Box>
-  );
-}
-
-function Row({ children, head = false }: { children: ReactNode; head?: boolean }) {
-  return (
-    <Box
-      sx={[
-        {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 1.5,
-          p: 1,
-          borderBottom: 1,
-          borderColor: "divider",
-          "&:last-child": { borderBottom: 0 },
-        },
-        head && {
-          py: 0.75,
-          fontSize: 10.5,
-          fontWeight: 600,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "text.secondary",
-        },
-      ]}
-    >
-      {children}
-    </Box>
-  );
-}
-
-const PRODUCT_CAPABILITIES: [string, StabilityLevelId, string][] = [
-  ["Monthly rollup", "ga", "12,480"],
-  ["Seasonal adjustment", "beta", "3,212"],
-  ["Scenario compare", "alpha", "418"],
-  ["Natural-language query", "prototype", "36"],
-];
-
-const CLIENT_FEATURES: [string, [string, StabilityLevelId][]][] = [
-  [
-    "Revenue forecast",
-    [
-      ["Monthly rollup", "ga"],
-      ["Seasonal adjustment", "beta"],
-      ["Scenario compare", "alpha"],
-    ],
-  ],
-  ["Assistant", [["Natural-language query", "prototype"]]],
-];
-
-/* The mark in two products: one for end users, where GA shows nothing, and
-   the client app, where clients review every Capability, GA included. */
-function InContext() {
-  return (
-    <Grid container spacing={2}>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Mockup
-          caption="In the product, for end users. GA shows nothing."
-          brandName="Northwind Ops"
-          tabs={[
-            { name: "Overview" },
-            { name: "Forecasts", level: "beta", on: true },
-            { name: "Routing", level: "alpha" },
-            { name: "Assistant", level: "prototype" },
-          ]}
-        >
-          <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px 12px" }}>
-            <Typography variant="h5" component="span">
-              Revenue forecast
-            </Typography>
-            <StabilityMark level="beta" feature="Revenue forecast" size="extra-long" />
-          </Box>
-          <Box>
-            <Row head>
-              <span>Capability</span>
-              <span>Runs (30d)</span>
-            </Row>
-            {PRODUCT_CAPABILITIES.map(([name, level, runs]) => (
-              <Row key={name}>
-                <Box
-                  component="span"
-                  sx={{ display: "inline-flex", flexWrap: "wrap", alignItems: "center", gap: 1 }}
-                >
-                  {name}
-                  {level !== "ga" ? <StabilityMark level={level} feature={name} /> : null}
-                </Box>
-                <Box component="span" sx={{ color: "text.secondary" }}>
-                  {runs}
-                </Box>
-              </Row>
-            ))}
-          </Box>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
-            <Button size="small" variant="contained">
-              Export forecast
-            </Button>
-            <Button size="small" variant="outlined">
-              Compare scenarios{" "}
-              <StabilityMark
-                level="alpha"
-                feature="Scenario compare"
-                size="short"
-                focusable={false}
-              />
-            </Button>
-          </Box>
-        </Mockup>
-      </Grid>
-      <Grid size={{ xs: 12, md: 6 }}>
-        <Mockup
-          caption="In the client app, for clients reviewing work. GA shows."
-          brandName="Exalynt"
-          tabs={[{ name: "Iterations" }, { name: "Features", on: true }, { name: "Estimates" }]}
-        >
-          <Typography variant="h5" component="span">
-            Northwind Ops
-          </Typography>
-          <Box>
-            <Row head>
-              <span>Capability</span>
-              <span>Stability</span>
-            </Row>
-            {CLIENT_FEATURES.map(([feature, capabilities]) => (
-              <Fragment key={feature}>
-                <Row>
-                  <Box component="span" sx={{ pt: 1, fontWeight: 600, color: "text.secondary" }}>
-                    {feature}
-                  </Box>
-                </Row>
-                {capabilities.map(([name, level]) => (
-                  <Row key={name}>
-                    <span>{name}</span>
-                    <StabilityMark level={level} feature={name} />
-                  </Row>
-                ))}
-              </Fragment>
-            ))}
-          </Box>
-        </Mockup>
-      </Grid>
-    </Grid>
   );
 }
 
@@ -492,8 +291,82 @@ export function StabilityLevelsGuideline() {
         </ul>
       </Guidance>
 
-      <Example title="In context">
-        <InContext />
+      <Example title="The banner">
+        <StabilityBanner level="alpha" feature="Scenario compare" />
+      </Example>
+      <Guidance title="The banner">
+        <p>
+          Most pages need only the mark. <code>StabilityBanner</code> is for the few where missing
+          the level would cost someone something. It&rsquo;s the extra-long mark over the
+          level&rsquo;s summary and what people can rely on it for, on a panel with its rule in the
+          level&rsquo;s color. The mark inside is still text on the panel&rsquo;s base surface.
+        </p>
+        <p>Use one when:</p>
+        <ul>
+          <li>
+            <strong>A Prototype shows sample or fake data that could pass for real,</strong> such as
+            a dashboard, a report, or an assistant&rsquo;s answers.
+          </li>
+          <li>
+            <strong>People are about to put real work into an Alpha or Beta,</strong> such as a
+            first payroll export or a new booking flow, and should keep a fallback.
+          </li>
+          <li>
+            <strong>You want something back,</strong> like feedback on an Alpha. Give the banner one{" "}
+            <code>action</code> that asks for it, or one that opens the fallback.
+          </li>
+          <li>
+            <strong>A whole app or area is at one level,</strong> such as a mobile app in Beta. One
+            banner on its first screen says so once, instead of a mark on every screen.
+          </li>
+        </ul>
+        <p>And keep to these:</p>
+        <ul>
+          <li>
+            <strong>Never for GA.</strong> GA is the default. Announce that something reached GA in
+            release notes, not in a level&rsquo;s colors.
+          </li>
+          <li>
+            <strong>One per page at most,</strong> at the top of what it&rsquo;s about: under
+            PageHeader for the whole page, or at the top of a section for one part of it. When
+            several parts are below GA, mark each, and give a banner only to the one that matters
+            most.
+          </li>
+          <li>
+            <strong>Don&rsquo;t put one on every page that isn&rsquo;t GA.</strong> People stop
+            reading banners they see everywhere, then miss the one that matters. For most pages, the
+            mark beside the title is enough.
+          </li>
+          <li>
+            <strong>Show the extra-long mark once.</strong> When a banner opens a page, leave the
+            badge off its PageHeader. The banner carries the level.
+          </li>
+          <li>
+            <strong>Keep marking Capabilities.</strong> A banner doesn&rsquo;t replace the marks in
+            the page&rsquo;s tables and lists.
+          </li>
+          <li>
+            <strong>Not for status.</strong> Outages, errors, and deadlines go in MUI&rsquo;s{" "}
+            <code>Alert</code>. A banner is only ever about a level.
+          </li>
+          <li>
+            <strong>Its defaults are the level&rsquo;s own words.</strong> Pass <code>title</code>{" "}
+            and children when you can say something specific to the page, such as which data is fake
+            or what the fallback is, but never promise more than the level does. Keep it to two
+            short sentences: on a phone, a banner can fill the first screen.
+          </li>
+          <li>
+            <strong>It doesn&rsquo;t close.</strong> It&rsquo;s for pages where the level should
+            stay in view.
+          </li>
+        </ul>
+      </Guidance>
+
+      <Example title="In a web app">
+        <WebApps />
+      </Example>
+      <Example title="In a mobile app">
+        <MobileApps />
       </Example>
       <Guidance title="Where to show it">
         <ul>
@@ -514,15 +387,26 @@ export function StabilityLevelsGuideline() {
           </li>
           <li>
             <strong>Inside a button or link,</strong> put the short mark after the label, with{" "}
-            <code>focusable={"{false}"}</code>.
+            <code>focusable={"{false}"}</code>. That includes a list row that opens something and a
+            phone&rsquo;s bottom tabs.
+          </li>
+          <li>
+            <strong>On a phone,</strong> put the extra-long mark under a screen&rsquo;s title rather
+            than beside it, and drop to the short mark wherever a name would wrap.
           </li>
         </ul>
       </Guidance>
+      <Example title="Which one where">
+        <WhereTable />
+      </Example>
 
       <Guidance title="Using the components">
         <ul>
           <li>
             <code>StabilityMark</code>: the mark, with its popover.
+          </li>
+          <li>
+            <code>StabilityBanner</code>: the level as a callout, for the few pages that need one.
           </li>
           <li>
             <code>StabilityDetails</code>: the popover&rsquo;s content on its own, for help text or
@@ -545,7 +429,7 @@ export function StabilityLevelsGuideline() {
         </p>
       </Guidance>
       <CodeBlock
-        code={`import { StabilityMark } from "@exalynt/design/components";
+        code={`import { StabilityBanner, StabilityMark } from "@exalynt/design/components";
 
 <PageHeader
   title="Invoice export"
@@ -555,7 +439,16 @@ export function StabilityLevelsGuideline() {
 <Button>
   Compare scenarios{" "}
   <StabilityMark level="alpha" feature="Scenario compare" size="short" focusable={false} />
-</Button>`}
+</Button>
+
+<StabilityBanner
+  level="prototype"
+  feature="Assistant"
+  title="Answers here use sample data."
+  action={<Button variant="outlined">Suggest a question</Button>}
+>
+  It's a prototype to help choose a direction. Don't act on these numbers.
+</StabilityBanner>`}
       />
     </>
   );

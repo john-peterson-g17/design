@@ -11,67 +11,49 @@ import { ReadmeLink } from "../ReadmeLink";
 
 const ROWS: [string, string, string][] = [
   [
-    "Answers",
-    "How stable is this, and how far can I rely on it today?",
-    "How far along is this Feature or project, across all its Capabilities?",
-  ],
-  [
-    "Belongs to",
-    "Each Capability, or a Feature or page with one overall level.",
-    "A Feature, from its Capabilities' levels, or a project, from its Features'.",
-  ],
-  [
     "Shown as",
     "One of four levels by name: StabilityMark, the Track and the level's name. Never a percentage.",
     "Always a percentage: MaturityRing, always a ring, never a bar or boxes.",
   ],
   [
-    "Used in",
-    "Everywhere, and above all in client projects, where it sets their users' expectations. Also in Exalynt's tools and the readme.",
-    "Mostly Exalynt's own tools, the portal above all, so clients can follow progress on their projects, Features, and Capabilities. Not in client products.",
+    "Goes on",
+    "Each Capability, or a Feature or page with one overall level.",
+    "A Feature, or a project.",
   ],
-  ["Helps people", "Decide what to rely on.", "See progress over time."],
+  [
+    "Used in",
+    "Everywhere, and above all in client products, where it sets their users' expectations. Also in Exalynt's tools and the readme.",
+    "Mostly Exalynt's own tools, the portal above all. Not in client products.",
+  ],
 ];
 
-/* How stability and maturity differ, on both guides so neither is read alone. */
+/* How stability and maturity differ on screen, on both guides so neither is read alone. */
 export function StabilityAndMaturity() {
   return (
     <>
       <Guidance title="Stability and maturity">
         <p>
-          They&rsquo;re related, and use the same four colors, but they answer different questions
-          for different people. Never show one in place of the other.
+          They use the same four colors, but show different things, so never show one in place of
+          the other. The readme explains{" "}
+          <ReadmeLink path="how-it-works/stability-levels">what each level means</ReadmeLink>,{" "}
+          <ReadmeLink path="how-it-works/maturity">how maturity is worked out</ReadmeLink> from
+          them, and{" "}
+          <ReadmeLink path="how-it-works/maturity#maturity-status-stability-and-bugs">
+            how the two differ
+          </ReadmeLink>
+          . On screen:
         </p>
         <ul>
           <li>
-            <strong>Stability</strong> sets expectations: how much something will still change, and
-            how far it can be relied on today. It&rsquo;s used everywhere, especially in client
-            projects, on the thing that has the level.
+            <strong>Stability is a level, never a percentage.</strong> A level is one of four names,
+            never &ldquo;75%&rdquo; or a progress bar. The 25% a level counts for is only how
+            maturity is worked out.
           </li>
           <li>
-            <strong>Maturity</strong> shows progress: how far along a Feature or a project is, as a
-            percentage worked out from its Capabilities&rsquo; stability. It&rsquo;s used mostly in
-            Exalynt&rsquo;s own tools, so clients have a good picture of how their projects,
-            Features, and Capabilities are coming along.
-          </li>
-          <li>
-            <strong>Maturity is shown with a percentage; stability never is.</strong> A level is one
-            of four names, never &ldquo;75%&rdquo; or a progress bar. The 25% a level counts for is
-            only how maturity is worked out, and never shown on a level.
-          </li>
-          <li>
-            <strong>Before relying on something, check its stability,</strong> not the maturity
-            around it. A project can be 80% mature with the one Capability you need still at Alpha.
+            <strong>Maturity is a percentage, always a ring.</strong> A bar or a row of boxes would
+            read as the stability mark&rsquo;s Track.
           </li>
         </ul>
-        <p>
-          The readme explains{" "}
-          <ReadmeLink path="how-it-works/stability-levels">what each level means</ReadmeLink> and{" "}
-          <ReadmeLink path="how-it-works/maturity#maturity-status-stability-and-bugs">
-            how maturity, status, and stability differ
-          </ReadmeLink>{" "}
-          for clients.
-        </p>
       </Guidance>
       <Example title="Side by side">
         <TableContainer>

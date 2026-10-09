@@ -2,9 +2,9 @@ import type { Theme } from "@mui/material/styles";
 
 // Exalynt stability levels: Prototype, Alpha, Beta, and GA. Each level sets
 // the expectation for how stable something is, for the people who use it and
-// the engineers who build on it. The wording and colors are copied from the
-// readme's src/shared/stability/stability.ts, which defines them; change them
-// there first, then here.
+// the engineers who build on it. The wording and colors are defined here, and
+// the readme installs this package to show them; what the levels mean, and
+// how work moves between them, is explained there (STABILITY_DOCS_URL).
 
 export const STABILITY_LEVEL_IDS = ["prototype", "alpha", "beta", "ga"] as const;
 

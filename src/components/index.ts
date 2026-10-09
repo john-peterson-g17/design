@@ -10,6 +10,7 @@ export * from "./MaturityRing";
 export * from "./PageHeader";
 export * from "./SearchSelect";
 export * from "./SectionCard";
+export * from "./StabilityBanner";
 export * from "./StabilityDetails";
 export * from "./StabilityMark";
 export * from "./StatCard";

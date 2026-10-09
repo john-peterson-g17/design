@@ -19,6 +19,7 @@ import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAlt
 import StairsOutlinedIcon from "@mui/icons-material/StairsOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
+import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import ViewAgendaOutlinedIcon from "@mui/icons-material/ViewAgendaOutlined";
 import WebAssetOutlinedIcon from "@mui/icons-material/WebAssetOutlined";
 import { CalloutPanelDemo } from "../components/CalloutPanel.demo";
@@ -30,6 +31,7 @@ import { SectionCardDemo } from "../components/SectionCard.demo";
 import { StatCardDemo } from "../components/StatCard.demo";
 import { MaturityDetailsDemo } from "../components/MaturityDetails.demo";
 import { MaturityRingDemo } from "../components/MaturityRing.demo";
+import { StabilityBannerDemo } from "../components/StabilityBanner.demo";
 import { StabilityDetailsDemo } from "../components/StabilityDetails.demo";
 import { StabilityMarkDemo } from "../components/StabilityMark.demo";
 import { ThemeToggleDemo } from "../components/ThemeToggle.demo";
@@ -188,7 +190,7 @@ export const catalog: Group[] = [
       {
         title: "Stability levels",
         description:
-          "Prototype, Alpha, Beta, and General Availability: what each level means, how it differs from maturity, and how to show one with the mark, at which size, in which colors, and where. Used everywhere, above all in client projects.",
+          "How to show a stability level: the mark at each size and in which colors, the banner for the few pages that need one, where each goes in web and mobile apps, and how it differs from maturity on screen. Used everywhere, above all in client projects. What each level means is in the readme.",
         icon: StairsOutlinedIcon,
         Demo: StabilityLevelsGuideline,
       },
@@ -201,6 +203,16 @@ export const catalog: Group[] = [
           "It's sized in em, so it scales with the text beside it and never wraps. A tap opens the popover, which is 300px wide at most and keeps 12px from the screen's edges. Where a row is tight on a phone, drop to the short mark rather than let the name wrap.",
         icon: SignalCellularAltOutlinedIcon,
         Demo: StabilityMarkDemo,
+      },
+      {
+        title: "StabilityBanner",
+        description:
+          "A stability level as a callout, for the few pages where missing it would cost someone something: a Prototype's fake data, or real work going into an Alpha. The extra-long mark, the level's summary and what people can rely on it for, and one optional `action`. Pass `title` and children for copy specific to the page. Never for GA.",
+        importFrom: "components",
+        phone:
+          "The action drops under the text and the padding steps down from 24px to 20px. Keep the copy to two short sentences: on a phone, a banner can fill the first screen.",
+        icon: FlagOutlinedIcon,
+        Demo: StabilityBannerDemo,
       },
       {
         title: "StabilityDetails",
@@ -220,7 +232,7 @@ export const catalog: Group[] = [
       {
         title: "Maturity",
         description:
-          "How complete and stable a Feature or a project is, as presently known, worked out from its Capabilities' stability levels. Mostly for Exalynt's own tools, so clients can follow progress. How it differs from stability, how it's counted, and how to show it: always as the ring.",
+          "How to show a Feature's or a project's maturity: always as the ring, worked out with `featureMaturity` and `projectMaturity`, never by hand. Mostly for Exalynt's own tools, so clients can follow progress. What it means and how it's counted are in the readme.",
         icon: TrendingUpOutlinedIcon,
         Demo: MaturityGuideline,
       },

@@ -52,15 +52,15 @@ export function MaturityGuideline() {
     <>
       <Guidance title="What maturity is">
         <p>
-          Maturity is a percentage that shows how complete and stable a Feature or a project is, as
-          presently known, worked out from its Capabilities&rsquo; stability levels. What it means,
-          how it&rsquo;s counted, and why 100% isn&rsquo;t the goal are in the readme&rsquo;s{" "}
+          Maturity is a percentage for a Feature or a project, worked out from its
+          Capabilities&rsquo; stability levels. What it means, how it&rsquo;s counted, and why 100%
+          isn&rsquo;t the goal are in the readme&rsquo;s{" "}
           <ReadmeLink path={MATURITY}>Maturity</ReadmeLink> page. This page covers how to show it.
         </p>
         <p>
           <strong>It&rsquo;s for Exalynt&rsquo;s own tools.</strong> The portal uses it so clients
-          have a good understanding of progress on their projects, Features, and Capabilities.
-          Client products don&rsquo;t show it to their users; they show stability.
+          can follow progress on their projects and Features. Client products don&rsquo;t show it to
+          their users; they show stability.
         </p>
       </Guidance>
 
@@ -90,11 +90,11 @@ const project = projectMaturity([88, scheduling, 38, null]); // 48
       </Example>
       <Guidance title="Bands">
         <p>
-          A maturity takes the color of the band it&rsquo;s in, named for the level at its top:{" "}
-          <strong>Experimental</strong> in Prototype&rsquo;s color from 0%,{" "}
-          <strong>Emerging</strong> in Alpha&rsquo;s from 25%, <strong>Promising</strong> in
-          Beta&rsquo;s from 50%, and <strong>Established</strong> in GA&rsquo;s from 75%. The band
-          name is what screen readers hear and what the popover says.
+          A ring takes the color of the{" "}
+          <ReadmeLink path={`${MATURITY}#reading-a-maturity`}>band</ReadmeLink> it&rsquo;s in, named
+          for the level at its top. The band&rsquo;s name, from <code>MATURITY_BANDS</code>, is what
+          screen readers hear and what the popover says, so don&rsquo;t name bands in copy of your
+          own.
         </p>
       </Guidance>
 
@@ -162,9 +162,9 @@ const project = projectMaturity([88, scheduling, 38, null]); // 48
 
       <Guidance title="Maturity and status">
         <p>
-          Status says whether work is happening: draft, ready, in progress, complete. Show it as a
-          plain icon and word, never in the level colors, so it can&rsquo;t be mistaken for
-          stability or maturity, the only two things that use them. The readme sets out{" "}
+          Show status (draft, ready, in progress, complete) as a plain icon and word, never in the
+          level colors, so it can&rsquo;t be mistaken for stability or maturity, the only two things
+          that use them. The readme sets out{" "}
           <ReadmeLink path={`${MATURITY}#maturity-status-stability-and-bugs`}>
             how maturity, status, stability, and bugs differ
           </ReadmeLink>
